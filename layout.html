@@ -1,50 +1,102 @@
+<!doctype HTML>
 <html>
-
-<head>
-<title>This is my Blog!</title>
-  <style type="text/css">
-  body {
-    padding-left: 11em;
- }
-  ul.navbar {
-    position: absolute;
-    top: 2em;
-    left: 1em;
-    width: 9em }
-  h1 {
-    font-family: Helvetica, Geneva, Arial,
-          SunSans-Regular, sans-serif }
-  </style>
-
-</head>
-
-<body>
-
-<div id="navigation">
-<ul class = "navbar">
-<li><a href = "nothing">home</a></li>
-<li><a href = "nothing">My Blog</a></li>
-<li><form>Search by Author: <input type = "text" q = "query" style = "width:100px" />
-<input type = "submit" value = "search" />
-</form></li>
-
-</ul>
-</div>
-<align
-<div id = "most recent">
-<p><font size = "4"><a href = "comments">Post Title</a></font></p>
-<p>This is where I wrote my blog post! Such a fascinating entry!</p>
-<p><font size = "2">date posted: somedate</font></p>
-</div>
-<br>
-<br>
-<br>
-<br>
-<div id = "older">
-<p><font size = "4"><a href = "comments">Older Post Title</a></font></p>
-<p>This is an older entry!</p>
-<p><font size = "2">date posted: somedate</font></p>
-</div>
-</body>
-
+	<head>
+		<title>This is my Blog!</title>
+		<style type="text/css">
+			body{
+				margin: 0px;
+			}
+			.header{
+				display: block;
+				background: #9cf;
+				padding: 5px;
+				height: 20px;
+			}
+			.container{
+				width: 800px;
+				max-width: 800px;
+				margin: 0px auto;
+			}
+			.nav{
+				display: inline-block;
+				float: left;
+				width: 200px;
+			}
+			.nav ul{
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+			}
+			.content{
+				display: inline-block;
+				margin: 0px;
+				padding: 0px;
+			}
+			h1{
+				font-size: 24px;
+				margin: 0px;
+				padding: 0px;
+			}
+			p{
+				margin: 5px 0px 0px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			This is the header bar.
+		</div>
+		<div class="container">
+			<div class="nav">
+				<ul>
+					<li>
+						<a href="nothing">
+							home
+						</a>
+					</li>
+					<li>
+						<a href="nothing">
+							My Blog
+						</a>
+					</li>
+					<li>
+						<form>
+							Search by Author: 
+							<input type="text" name="query" />
+							<input type="submit" value="search" />
+						</form>
+					</li>
+				</ul>
+			</div>
+			<div class="content">
+				<div id="article">
+					<h1 class="title">
+						<a href="comments">
+							Post Title
+						</a>
+					</h1>
+					<p>
+						This is where I wrote my blog post! Such a fascinating entry!
+					</p>
+					<p>
+						date posted: somedate
+					</p>
+				</div>
+				<br>
+				<div id="article">
+					<h1 class="title">
+						<a href="comments">
+							Older Post Title
+						</a>
+					</h1>
+					<p>
+						This is an older entry!
+					</p>
+					<p>
+						date posted: somedate
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
