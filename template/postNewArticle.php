@@ -4,5 +4,5 @@
 	<textarea name = "post" cols = "60" rows = "15" placeholder = "Enter Post Here">
 	</textarea>
 	<br>
-	<input type = "submit" value = "Post" />
+	<input type = "submit" value = "Post" name = "Submit" />
 </form>

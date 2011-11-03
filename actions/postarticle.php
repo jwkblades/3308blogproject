@@ -28,7 +28,14 @@ class page{
 		{
 			if($user['can_post_article'])
 			{
-				$this -> content = $tmp -> get("postNewArticle");
+				if(isset($_POST['Submit']))
+				{
+					$this -> post($_POST['post'],$_POST['title']);
+				}
+				else
+				{
+					$this -> content = $tmp -> get("postNewArticle");
+				}
 			}
 			else
 			{
