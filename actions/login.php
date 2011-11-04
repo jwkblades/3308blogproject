@@ -8,7 +8,7 @@ class Page{
 	}
 	private function login(){
 		global $sql;
-		$query = "SELECT id FROM users WHERE username = '" . $sql->san($_POST['uname']) . "' AND password = '" . md5($sql->san($_POST['pword'])) . "' LIMIT 1";
+		$query = "SELECT user_id AS id FROM users WHERE username = '" . $sql->san($_POST['uname']) . "' AND password = '" . md5($sql->san($_POST['pword'])) . "' LIMIT 1";
 		$results = $sql->query($query);
 		if($sql->numRows($results) == 1){
 			$row = $sql->fetchAssoc($results);

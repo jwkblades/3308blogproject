@@ -19,7 +19,7 @@ class Page{
 		$password = $this->sanitize($p);
 		$email = $this->sanitize($e);
 	
-		$q = "INSERT INTO users (group_id, username, password, email) VALUES (3, $username, $password, $email)";
+		$q = "INSERT INTO users (group_id, username, password, email) VALUES (3, '" . $username . "', '" . md5($password) . "', '" . $email . "')";
 		$sql->query($q);
 	}
 	private function sanitize($in){
