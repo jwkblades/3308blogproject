@@ -2,10 +2,11 @@
 session_start();
 
 require_once "config.php";
-require_once "classes/Mysql.php";
+require_once "classes/MySQL.php";
 require_once "classes/Replace.php";
 require_once "classes/Template.php";
 require_once "functions.php";
+
 
 $sql = new Mysql($settings['mysqlUser'], $settings['mysqlPass'], $settings['mysqlHost']);
 $sql->select($settings['mysqlDb']);
@@ -19,7 +20,7 @@ if(empty($act)){
 //
 $act = stripslashes($act);
 $page = array();
-$user = getUserInfo();
+$user = array();//getUserInfo();
 //
 if(file_exists("actions/" . $act . ".php")){
   require_once "actions/" . $act . ".php";
