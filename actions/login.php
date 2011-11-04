@@ -4,6 +4,7 @@ class Page{
 	public $title;
 	public $content;
 	public function Page(){
+		$this->title = "Login";
 	}
 	private function login(){
 		global $sql;
@@ -11,11 +12,11 @@ class Page{
 		$results = $sql->query($query);
 		if($sql->numRows($results) == 1){
 			$row = $sql->fetchAssoc($results);
-			$id = $row['id']
+			$id = $row['id'];
 			$timestamp = date();
 			$date = date("Y-m-d");
 			$hash = md5($date . $id . $timestamp . "THIS IS A SECRET KEY");
-			$query = "INSERT INTO sessions(`user_id`, `hash`, `created_on`) VALUES(" . $id . ", '" . $hash . "', DATE('" . $date . "'));"
+			$query = "INSERT INTO sessions(`user_id`, `hash`, `created_on`) VALUES(" . $id . ", '" . $hash . "', DATE('" . $date . "'));";
 			$sql->query($query);
 			$_SESSION['uid'] = $hash;
 		}
