@@ -1,25 +1,32 @@
 <?php
 
-class MySQL{
-	private $dbConn;
-	public function MySQL($user, $password, $host){
-		$this->dbConn = mysql_connext($host, $user, $password);
-	}
-	public function selectDatabase($db){
-		mysql_select_db($db, $this->dbConn);
-	}
-	public function query($query){
-		$results = mysql_query($query, $this->dbConn);
-		return $results;
-	}
-	public function fetchAssoc($result){
-		$row = mysql_fetch_assoc($result, $this->dbConn);
-		return $row;
-	}
-	public function close(){
-		mysql_close($this->dbConn);
-		unset($this->dbConn);
-	}
+class Mysql{
+  private $dbcon;
+  public function __construct($user, $pass, $host){
+    $this->dbcon = mysql_connect($host, $user, $pass) or die(mysql_error());
+  }
+  public function select($db){
+    mysql_select_db($db, $this->dbcon);
+  }
+  public function query($queryString){
+    $result = mysql_query($queryString, $this->dbcon) or die("Query: " . $queryString . "<br/>" . mysql_error());
+    return $result;
+  }
+  public function fetchAssoc($results){
+    return mysql_fetch_assoc($results);
+  }
+  public function fetchObj($results){
+    return mysql_fetch_object($results);
+  }
+  public function numRows($results){
+    return mysql_num_rows($results);
+  }
+  public function san($in){
+    return mysql_real_escape_string($in);
+  }
+  public function close(){
+    mysql_close($this->dbcon);
+  }
 }
 
 ?>
