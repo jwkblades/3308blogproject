@@ -1,12 +1,7 @@
 				<ul>
 					<li>
-						<a href="nothing">
-							home
-						</a>
-					</li>
-					<li>
-						<a href="nothing">
-							My Blog
+						<a href="[[url]]">
+							Home
 						</a>
 					</li>
 					<li>

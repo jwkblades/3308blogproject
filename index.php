@@ -20,7 +20,7 @@ if(empty($act)){
 //
 $act = stripslashes($act);
 $page = array();
-$user = array();//getUserInfo();
+$user = getUserInfo();
 //
 if(file_exists("actions/" . $act . ".php")){
   require_once "actions/" . $act . ".php";

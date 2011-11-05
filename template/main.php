@@ -40,11 +40,19 @@
 			p{
 				margin: 5px 0px 0px 0px;
 			}
+			.right{
+				float: right;
+			}
+			form{
+				display: inline;
+				margin: 0px;
+				padding: 0px;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="header">
-			This is the header bar.
+			[[template:headerBar]]
 		</div>
 		<div class="container">
 			<div class="nav">
