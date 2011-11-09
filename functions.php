@@ -15,6 +15,9 @@ function _if($bool, $ifout, $elseout){
 	return $elseout;
 }
 
+function isLoggedIn(){
+	return isset($_SESSION['uid']);
+}
 
 function getUserInfo(){
 	global $sql;
