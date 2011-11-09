@@ -7,7 +7,7 @@ class Page{
 		$this->title = "Home";
 	}
 	public function main(){
-		global $sql;
+		global $sql, $rmut;
 		$page = 0;
 		if(isset($_GET['file']) && is_numeric($_GET['file'])){
 			$page = $_GET['file'];
@@ -23,8 +23,13 @@ class Page{
 			if(!$row){
 				continue;
 			}
-			$content .= Replace::on($tmp->get());
+			$rmut = array_merge($article, $row);
+			$content .= Replace::on($tmp->get("singleArticleListItem"));
 		}
+		if($content == ""){
+			$content = $tmp->get("noArticlesExist");
+		}
+		$this->content = $content;
 	}
 }
 

@@ -6,6 +6,9 @@
 			body{
 				margin: 0px;
 			}
+			.article{
+				max-width: 590px;
+			}
 			.header{
 				display: block;
 				background: #9cf;
