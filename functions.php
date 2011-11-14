@@ -15,6 +15,20 @@ function _if($bool, $ifout, $elseout){
 	return $elseout;
 }
 
+function userCanEdit($u, $cid){
+	global $sql;
+	if($u['can_post_article'] == 1){
+		return true;
+	}
+	$query = "SELECT post_id FROM posts WHERE post_id = " . $sql->san($cid) . " AND poster_id = " . $u['user_id'] . " LIMIT 1";
+	$results = $sql->query($query);
+	if($sql->numRows($results) != 1){
+		return false;
+	}
+	$row = $sql->fetchAssoc($results);
+	return $cid == $row['post_id'];
+}
+
 function isLoggedIn(){
 	return isset($_SESSION['uid']);
 }
