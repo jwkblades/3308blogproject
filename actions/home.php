@@ -23,6 +23,7 @@ class Page{
 			if(!$row){
 				continue;
 			}
+			$row['post'] = nl2br($row['post']);
 			$rmut = array_merge($article, $row);
 			$content .= Replace::on($tmp->get("singleArticleListItem"));
 		}

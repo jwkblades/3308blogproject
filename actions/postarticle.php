@@ -23,6 +23,7 @@ class page{
 	{
 		global $user;
 		global $sql;
+		global $config;
 		$tmp = new Template();
 		if(isLoggedIn())
 		{
@@ -31,6 +32,7 @@ class page{
 				if(isset($_POST['Submit']))
 				{
 					$this -> post($_POST['post'],$_POST['title']);
+					header("Location: " . $config['url']);
 				}
 				else
 				{

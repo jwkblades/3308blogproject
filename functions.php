@@ -50,5 +50,14 @@ function slug($str){
 	return $str;
 }
 
+function userlinks(){
+	global $user;
+	$content = "";
+	$tmp = new Template();
+	if($user['can_post_article'] == 1){
+		$content .= $tmp->get("articlePostLink");
+	}
+	return $content;
+}
 
 ?>
