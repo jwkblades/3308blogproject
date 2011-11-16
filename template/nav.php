@@ -9,7 +9,7 @@
 						<form action="[[url]]?act=search" method="post">
 							Search by Author: 
 							<input type="text" name="query" />
-							<input type="submit" value="search" />
+							<input type="submit" value="search" name="Submit"/>
 						</form>
 					</li>
 				</ul>
