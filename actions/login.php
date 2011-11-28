@@ -22,16 +22,22 @@ class Page{
 		}
 		else{
 			unset($_SESSION['uid']);
+			return false;
 		}
+		return true;
 	}
 	public function main(){
 		global $config;
+		$tmp = new Template();
 		if(isset($_POST['submit'])){
-			$this->login();
-			header("Location: " . $config['url']);
+			if(!$this->login()){
+				$this->content = $tmp->get("invalidLoginInfo");
+			}
+			else{
+				header("Location: " . $config['url']);
+			}
 			return;
 		}
-		$tmp = new Template();
 		$this->content = $tmp->get("loginForm");
 	}
 }

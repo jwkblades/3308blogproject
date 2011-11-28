@@ -9,6 +9,7 @@ class Page{
 	private function savePost($uid, $cid){
 		global $sql;
 		$query = "UPDATE posts SET post = '" . $sql->san($_POST['post']) . "' WHERE post_id = " . $sql->san($cid) . " AND poster_id = " . $uid . " LIMIT 1";
+		$sql->query($query);
 	}
 	private function loadPost($uid, $cid){
 		global $sql, $rmut;
