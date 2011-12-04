@@ -1,6 +1,13 @@
 body{
 	margin: 0px;
 }
+.approved{
+	padding: 5px;
+}
+.unapproved{
+	background: #fcc;
+	padding: 5px;
+}
 .small{
 	font-size: small;
 }

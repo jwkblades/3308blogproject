@@ -6,14 +6,53 @@ class Page{
 	public function Page(){
 	}
 	private function loadPosts($aid){
-		global $sql, $rmut;
-		$query = "SELECT poster_id, approved, post, posted_on FROM posts WHERE article_id = " . $aid . " ORDER BY posted_on ASC";
+		global $user, $sql, $rmut;
+		$query = "SELECT posts.poster_id, posts.approved, posts.post, posts.posted_on, posts.post_id, users.username FROM posts, users WHERE article_id = " . $aid . " AND posts.poster_id = users.user_id ORDER BY posted_on ASC";
 		$results = $sql->query($query);
 		$content = "";
 		$tmp = new Template();
 		while($row = $sql->fetchAssoc($results)){
+			$row['posted_on'] = date("Y-m-d g:i A", strtotime($row['posted_on']));
 			$rmut = $row;
-			$content .= Replace::on($tmp->get("singlePost"));
+			$rmut['editLink'] = "";
+			$view = true;
+			if(!$row['approved']){
+				$view = false;
+			}
+			if(userCanEdit($user, $row['post_id'])){
+				$rmut['editLink'] = "<a href=\"[[url]]?act=edit&cid=[[:post_id]]\">[Edit]</a>";
+				$view = true;
+			}
+			if($row['approved']){
+				$rmut['approved'] = "approved";
+				if($user['can_approve_comments']){
+					$rmut['approveLink'] = "<a href=\"[[url]]?act=approve&cid=[[:post_id]]&app=0\">[Unapprove]</a>";
+					$view = true;
+				}
+			}
+			else{
+				$rmut['approved'] = "unapproved";
+				if($user['can_unapprove_comments']){
+					$rmut['approveLink'] = "<a href=\"[[url]]?act=approve&cid=[[:post_id]]&app=1\">[Approve]</a>";
+					$view = true;
+				}
+			}
+			if($user['user_id'] == $row['poster_id']){
+				$view = true;
+			}
+			if($view){
+				$content .= Replace::on($tmp->get("singlePost"));
+			}
+		}
+		return $content;
+	}
+	private function commentForm($aid){
+		global $user, $rmut;
+		$tmp = new Template();
+		$content = "";
+		if($user['user_id'] != 0 && $user['can_comment']){
+			$rmut = array("article_id" => $aid);
+			$content = Replace::on($tmp->get("commentForm"));
 		}
 		return $content;
 	}
@@ -35,7 +74,7 @@ class Page{
 		$this->title = $rObj->article_title;
 		$tmp = new Template();
 		$rmut = array("title" => $this->title, "content" => $this->loadPosts($aid));
-		$this->content = Replace::on($tmp->get("basePage"));
+		$this->content = Replace::on($tmp->get("basePage")) . $this->commentForm($aid);
 	}
 }
 
