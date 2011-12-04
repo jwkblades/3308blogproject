@@ -68,7 +68,7 @@ function userlinks(){
 	global $user;
 	$content = "";
 	$tmp = new Template();
-	if($user['can_post_article'] == 1){
+	if($user['user_id'] != 0 && $user['can_post_article'] == 1){
 		$content .= $tmp->get("articlePostLink");
 	}
 	return $content;
