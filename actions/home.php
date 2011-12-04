@@ -24,6 +24,7 @@ class Page{
 				continue;
 			}
 			$row['post'] = nl2br($row['post']);
+			$row['posted_on'] = date("Y-m-d g:i A", strtotime($row['posted_on']));
 			$rmut = array_merge($article, $row);
 			$rmut['editLink'] = "";
 			if(userCanEdit($user, $row['post_id'])){
