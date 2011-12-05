@@ -20,11 +20,19 @@ class page{
 				$this -> content = $tmp -> get("userPromotionNameNotFound");
 				$this -> content .= $tmp -> get("userPromotion");
 			}
-			$grp = $sql -> san($_POST['Groups']);
-			$change = "UPDATE users SET group_id =".$grp. " WHERE username like '" .$author."'";
-			$grps = array(1 => "Admin", 2 => "Moderator", 3 => "Member", 4 => "Trusted Member", 5 => "Banned");
-			$rmut = array("author" => $_POST['author'], "group" => $grps[$_POST['Groups']]);
-			$this -> content .= Replace::on($tmp -> get("permissionsSuccess"));
+			else
+			{
+				$grp = $sql -> san($_POST['Groups']);
+				$change = "UPDATE users SET group_id =".$grp. " WHERE username like '" .$author."'";
+				$grps = array(1 => "Admin", 2 => "Moderator", 3 => "Member", 4 => "Trusted Member", 5 => "Banned");
+				$rmut = array("author" => $_POST['author'], "group" => $grps[$_POST['Groups']]);
+				$this -> content .= Replace::on($tmp -> get("permissionsSuccess"));
+			}
+		}
+		else
+		{
+			$this -> content = $tmp -> get("userPromotion");
 		}
 	}
+}
 ?>
