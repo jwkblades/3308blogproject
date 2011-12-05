@@ -14,11 +14,17 @@ class page{
 		if(isset($_POST['Submit']))
 		{
 			$author = $sql -> san($_POST['query']);
-			$q = "SELECT * FROM users WHERE username like '".$author."'";
+			$q = "SELECT * FROM users WHERE username LIKE '".$author."'";
 			$tem = $sql -> query($q);
 			$ret = $sql -> fetchAssoc($tem);
-			$rmut = array("name" => $ret['username']);
-			$this -> content = Replace::on($tmp -> get("searchResults"));
+			$userid = $ret['user_id'];
+			$articles = "SELECT * FROM articles WHERE poster_id = " .$userid;
+			$ret = $sql -> query($articles);
+			while($row = $sql->fetchAssoc($ret))
+			{
+				$rmut = $row;
+				$this -> content .= Replace::on($tmp -> get("searchResults"));
+			}
 		}
 	}
 }
