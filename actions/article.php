@@ -11,8 +11,10 @@ class Page{
 		$results = $sql->query($query);
 		$content = "";
 		$tmp = new Template();
+		$first = true;
 		while($row = $sql->fetchAssoc($results)){
 			$row['posted_on'] = date("Y-m-d g:i A", strtotime($row['posted_on']));
+			$row['post'] = nl2br($row['post']);
 			$rmut = $row;
 			$rmut['editLink'] = "";
 			$view = true;
@@ -23,25 +25,31 @@ class Page{
 				$rmut['editLink'] = "<a href=\"[[url]]?act=edit&cid=[[:post_id]]\">[Edit]</a>";
 				$view = true;
 			}
-			if($row['approved']){
+			if($row['approved'] || $first){
 				$rmut['approved'] = "approved";
-				if($user['can_approve_comments']){
+				if($user['can_approve_comments'] && !$first){
 					$rmut['approveLink'] = "<a href=\"[[url]]?act=approve&cid=[[:post_id]]&app=0\">[Unapprove]</a>";
 					$view = true;
 				}
 			}
 			else{
 				$rmut['approved'] = "unapproved";
-				if($user['can_unapprove_comments']){
+				if($user['can_unapprove_comments'] && !$first){
 					$rmut['approveLink'] = "<a href=\"[[url]]?act=approve&cid=[[:post_id]]&app=1\">[Approve]</a>";
 					$view = true;
 				}
 			}
-			if($user['user_id'] == $row['poster_id']){
+			if($user['user_id'] == $row['poster_id'] || $first){
 				$view = true;
+				if(!$first){
+					$rmut['deleteLink'] = "<a href=\"[[url]]?act=delete&pid=[[:post_id]]\">[Delete]</a>";
+				}
 			}
 			if($view){
 				$content .= Replace::on($tmp->get("singlePost"));
+			}
+			if($first){
+				$first = false;
 			}
 		}
 		return $content;

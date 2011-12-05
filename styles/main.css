@@ -1,6 +1,10 @@
 body{
 	margin: 0px;
 }
+.white{
+	color: #fff;
+	font-weight: bold;
+}
 .approved{
 	padding: 5px;
 }
