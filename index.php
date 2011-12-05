@@ -1,4 +1,8 @@
 <?php
+//define("CC", "true");
+if(defined("CC")){
+	xdebug_start_code_coverage();
+}
 session_start();
 
 require_once "config.php";
@@ -38,4 +42,8 @@ echo Replace::on($main);
 
 $sql->close();
 session_write_close();
+if(defined("CC")){
+	var_dump(xdebug_get_code_coverage());
+	xdebug_stop_code_coverage();
+}
 ?>
