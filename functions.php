@@ -71,6 +71,9 @@ function userlinks(){
 	if($user['user_id'] != 0 && $user['can_post_article'] == 1){
 		$content .= $tmp->get("articlePostLink");
 	}
+	if($user['user_id'] != 0 && $user['group_id'] == 1){
+		$content .= $tmp->get("promotionLink");
+	}
 	return $content;
 }
 
