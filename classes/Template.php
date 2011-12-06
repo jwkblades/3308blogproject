@@ -6,12 +6,13 @@ class Template{
     return array_key_exists($name, self::$cache);
   }
 	private function loadFile($name){
-		$filename = "template/" . $name . ".php";
+		$filename = dirname(__FILE__) . "/../template/" . $name . ".php";
     if(file_exists($filename)){
       $content = file_get_contents($filename);
       self::$cache[$name] = $content;
 			return true;
     }
+		self::$cache[$name] = "";
     return false;
   }
   public function Template(){
